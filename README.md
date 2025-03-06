@@ -21,20 +21,26 @@ yarn add -D dts-isomorphic-styles-loader
   test: /\.scss$/,
   use: [
     {
+      loader: 'style-loader',
+      options: {
+        esModule: false,
+      },
+    },
+    {
       loader: 'dts-isomorphic-styles-loader',
       options: {
-        namedExport: false,
-        banner: "// This file is generated automatically"
+        namedExport: false
       }
     },
     require.resolve('isomorphic-style-loader'),
     {
       loader: 'css-loader',
       options: {
-        modules: true, // this option must be enabled
-        camelCase: 'only',
-        localIdentName: '[local]',
-        exportOnlyLocals: true
+        // options for the v5 of css-loader
+        modules: {
+          exportLocalsConvention: 'camelCaseOnly',
+          localIdentName: '[local]'
+        }
       }
     },
     'sass-loader'
@@ -66,6 +72,23 @@ export default styles;
 
 ### `banner`
 Adds a "banner" prefix to each generated file.
+
+### `customTypings`
+A function that accepts classes (an array of string) and returns the content of declaration file:
+```js
+customTypings: classes => {
+  let content = '// This file is generated automatically\ndeclare const styles: {\n';
+  for (const c of classes) {
+    content += `  ${c}: string;\n`;
+  }
+  content += '};\nexport default styles;\n';
+  return content;
+}
+```
+`namedExport` and `banner` option will be ignored
+
+### `dropEmptyFile`
+If there are no classes, the typings file will not be generated, and the existing will be deleted.
 
 ## Usage in Typescript
 ```ts
