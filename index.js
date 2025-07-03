@@ -99,6 +99,10 @@ function getClasses(content) {
     // when `onlyLocals` is off
     from = content.indexOf('exports.locals = {');
   }
+  // check v🤷‍♂️ -- the one that works
+  if (from === -1) {
+    from = content.indexOf('export default {');
+  }
 
   if (~from) {
     content = content.slice(from);
