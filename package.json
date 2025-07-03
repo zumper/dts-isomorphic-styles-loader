@@ -1,6 +1,6 @@
 {
   "name": "@zumper/dts-isomorphic-styles-loader",
-  "version": "2.0.1-zumper.0",
+  "version": "2.0.1-zumper.1",
   "description": "webpack loader to generate typings for css modules and isomorphic-style-loader",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://zumper-616113654770.d.codeartifact.us-east-1.amazonaws.com/npm/npm-local/"
+    "registry": "https://zumper-616113654770.d.codeartifact.us-east-1.amazonaws.com/npm/npm/"
   },
   "dependencies": {
     "loader-utils": "^1.2.0"
